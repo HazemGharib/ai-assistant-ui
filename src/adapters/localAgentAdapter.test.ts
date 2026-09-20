@@ -30,7 +30,7 @@ describe("localAgentAdapter", () => {
     }
 
     const finalText = chunks.at(-1) ?? "";
-    expect(finalText).toContain("local UI stub");
+    expect(finalText).toContain("Legacy local stub");
     expect(finalText).toContain("Hello stub");
   });
 });

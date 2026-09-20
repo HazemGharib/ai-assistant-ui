@@ -1,3 +1,7 @@
+/**
+ * Legacy offline stub — prefer `VITE_USE_MOCK_BACKEND=true` (contract-faithful mock)
+ * or `VITE_BACKEND_BASE_URL` for integrated mode. Kept for emergency fallback only.
+ */
 import type { ChatModelAdapter, ThreadMessage } from "@assistant-ui/react";
 
 function lastUserText(messages: readonly ThreadMessage[]): string {
@@ -17,26 +21,14 @@ function lastUserText(messages: readonly ThreadMessage[]): string {
   return "";
 }
 
-/**
- * Local-first stub adapter. Swappable for the Node agent backend later
- * without changing Thread / App UI (constitution: UI ↔ agent separation).
- */
 export const localAgentAdapter: ChatModelAdapter = {
   async *run({ messages, abortSignal }) {
     const prompt = lastUserText(messages);
     const reply = [
-      "This is the local UI stub (no agent backend yet).",
+      "Legacy local stub — switch to mock backend (`VITE_USE_MOCK_BACKEND=true`)",
+      "or set `VITE_BACKEND_BASE_URL` for the public conversation/streaming API.",
       "",
-      prompt
-        ? `You asked: “${prompt}”`
-        : "Send a message to exercise the chat surface.",
-      "",
-      "MVP agent capabilities (coming next):",
-      "• search_documents() — RAG",
-      "• fetch_url() — MCP",
-      "• calculate() — MCP",
-      "",
-      "Point this adapter at the Node agent when it is ready.",
+      prompt ? `You asked: “${prompt}”` : "Send a message to exercise the chat surface.",
     ].join("\n");
 
     let accumulated = "";
@@ -46,7 +38,7 @@ export const localAgentAdapter: ChatModelAdapter = {
       yield {
         content: [{ type: "text", text: accumulated }],
       };
-      await new Promise((resolve) => setTimeout(resolve, 18));
+      await new Promise((resolve) => setTimeout(resolve, 12));
     }
   },
 };

@@ -1,42 +1,59 @@
 # AI Assistant UI
 
-Minimal conversational frontend for the TypeScript RAG + MCP agent platform.
+Minimal conversational frontend for the TypeScript RAG + MCP agent platform (Phase 2).
 
 ## Ownership
 
 | Owns | Does not own |
 | ------ | -------------- |
-| Chat presentation, client UX, adapters | Orchestration, RAG, MCP tools |
+| Chat presentation, multi-conversation UX, adapters | Orchestration, RAG, MCP tools, LLM providers |
 
-Outbound: `ui-backend-chat` via `@hazemgharib/ai-agent-contracts@0.1.0` (GitHub Packages; see `.npmrc`)  
+Outbound: UI↔backend conversation + SSE stream via `@hazemgharib/ai-agent-contracts@0.2.0`  
+**Non-goals**: no direct RAG, MCP, vector DB, or LLM client dependencies in this repo.
+
 Full map: [`ai-assistant-spec-hub/overall-context/ownership.md`](../ai-assistant-spec-hub/overall-context/ownership.md)
 
 ## Stack
 
 - React 19 + TypeScript + Vite
 - [assistant-ui](https://www.assistant-ui.com/)
-- Local stub adapter when `VITE_BACKEND_BASE_URL` is unset; HTTP backend adapter when set
+- Contract-faithful **mock backend** (isolated) or HTTP backend (integrated)
 
-## Isolated run
+## Environment
+
+See `.env.example`:
+
+| Variable | Purpose |
+|----------|---------|
+| `VITE_USE_MOCK_BACKEND=true` | Isolated persisting mock (default when backend URL unset) |
+| `VITE_BACKEND_BASE_URL` | Integrated mode — public backend origin only |
+
+Never put LLM/RAG/MCP secrets in UI env files.
+
+## Isolated run (mock)
 
 ```bash
-# requires ~/.npmrc auth for GitHub Packages, or a local contracts link (see contracts README)
 pnpm install
 pnpm test
+pnpm test:boundary
 pnpm lint
 pnpm typecheck
-pnpm dev
+VITE_USE_MOCK_BACKEND=true pnpm dev
 ```
 
-Open the URL Vite prints (usually `http://127.0.0.1:5173`). With no `VITE_BACKEND_BASE_URL`, uses `localAgentAdapter` (no backend).
+Open the URL Vite prints (usually `http://127.0.0.1:5173`).
 
 ## Integrated mode
 
 ```bash
-VITE_BACKEND_BASE_URL=http://127.0.0.1:3001 pnpm dev
+# Terminal A: backend with conversation + stream stubs
+cd ../ai-assistant-backend && pnpm dev
+
+# Terminal B: UI
+VITE_USE_MOCK_BACKEND=false VITE_BACKEND_BASE_URL=http://127.0.0.1:3001 pnpm dev
 ```
 
-See [quickstart](../ai-assistant-spec-hub/specs/001-platform-foundation/quickstart.md).
+Smoke checklist: [`specs/002-conversational-ui/quickstart.md`](../ai-assistant-spec-hub/specs/002-conversational-ui/quickstart.md)
 
 ## Engineering standards
 
@@ -44,5 +61,6 @@ See [quickstart](../ai-assistant-spec-hub/specs/001-platform-foundation/quicksta
 
 ## Security / cost
 
-- **$0** local shell — no API keys, no AWS, no paid cloud required
-- No secrets in the browser; no inter-service auth in Phase 1
+- **$0** local shell — no API keys, no AWS, no paid cloud required for UI
+- No secrets in the browser; no inter-service auth in local Phase 2
+- Citations are display-only (no external navigation required)

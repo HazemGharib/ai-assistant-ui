@@ -12,8 +12,8 @@ importers:
         specifier: ^0.15.21
         version: 0.15.21(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@hazemgharib/ai-agent-contracts':
-        specifier: 0.1.0
-        version: 0.1.0
+        specifier: 0.2.0
+        version: 0.2.0
       react:
         specifier: ^19.2.8
         version: 19.3.0
@@ -278,8 +278,8 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@hazemgharib/ai-agent-contracts@0.1.0':
-    resolution: {integrity: sha512-6AUakOspC/fjqfklkkDthyX3cMuKJnzZMaS+bhin4aCqkbe9+buB2HG1ghs11IR3CDpuPxN015HPLyZ5pZ9vIQ==, tarball: https://npm.pkg.github.com/download/@hazemgharib/ai-agent-contracts/0.1.0/82e76a435466864a783b12d9ebd04f511aaeb7a5}
+  '@hazemgharib/ai-agent-contracts@0.2.0':
+    resolution: {integrity: sha512-nylS5SBAyUDh9GpAzEX5JFh1ghPeN6L6Oui38y8iXR+Ne/50/+y3OF90mCvYgU20QSFUIQHyYppZniFaid/40A==, tarball: https://npm.pkg.github.com/download/@hazemgharib/ai-agent-contracts/0.2.0/86dbe189a2d22d5068521a22246ee7a838ac78b7}
     engines: {node: '>=22'}
 
   '@jridgewell/sourcemap-codec@1.6.0':
@@ -2089,7 +2089,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@hazemgharib/ai-agent-contracts@0.1.0':
+  '@hazemgharib/ai-agent-contracts@0.2.0':
     dependencies:
       zod: 3.25.76
 

@@ -13,12 +13,13 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:boundary": "node scripts/assert-ui-boundary.mjs",
     "typecheck": "tsc -b --pretty false",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@hazemgharib/ai-agent-contracts": "0.1.0",
+    "@hazemgharib/ai-agent-contracts": "0.2.0",
     "@assistant-ui/react": "^0.15.21",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"

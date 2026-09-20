@@ -37,6 +37,143 @@
   min-height: 0;
 }
 
+.conv-list {
+  width: 15rem;
+  flex-shrink: 0;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  padding: 0.75rem 0.5rem;
+  overflow: auto;
+}
+
+.conv-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.4rem 0.75rem;
+}
+
+.conv-list__title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.conv-list__new {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.55rem;
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.conv-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.conv-list__item {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  border-radius: 0.55rem;
+  padding: 0.55rem 0.6rem;
+  font: inherit;
+  font-size: 0.88rem;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conv-list__item:hover {
+  background: color-mix(in oklab, var(--accent) 10%, transparent);
+}
+
+.conv-list__item--active {
+  background: color-mix(in oklab, var(--accent) 18%, transparent);
+  font-weight: 600;
+}
+
+.conv-list__error,
+.conv-list__hint {
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding: 0.4rem;
+}
+
+.citations {
+  margin-top: 0.65rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.citations__summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.citations__list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.citations__item {
+  margin-bottom: 0.45rem;
+}
+
+.citations__title {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.citations__snippet {
+  margin: 0.2rem 0;
+}
+
+.citations__url {
+  word-break: break-all;
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+}
+
+.activity {
+  max-width: var(--thread-max-width);
+  margin: 0 auto;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.composer__queued {
+  font-size: 0.75rem;
+  color: var(--muted);
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .conv-list {
+    width: 11rem;
+  }
+}
+
+
 .thread {
   --thread-max-width: 42rem;
   flex: 1;

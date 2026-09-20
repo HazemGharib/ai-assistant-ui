@@ -31,8 +31,9 @@ jobs:
         run: pnpm install --no-frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # Prefer --frozen-lockfile after @hazemgharib/ai-agent-contracts@0.1.0 is published
+        # Prefer --frozen-lockfile; contracts published as @hazemgharib/ai-agent-contracts@0.2.0
         # and lockfiles are regenerated from GitHub Packages.      - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
+      - run: pnpm test:boundary
       - run: pnpm build
