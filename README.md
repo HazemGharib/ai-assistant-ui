@@ -10,8 +10,8 @@ Minimal conversational frontend for the TypeScript RAG + MCP agent platform.
 ## Run locally
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Open the URL Vite prints (usually `http://localhost:5173`).
