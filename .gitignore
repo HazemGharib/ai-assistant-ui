@@ -14,6 +14,13 @@ dist
 dist-ssr
 *.local
 
+# Secrets & local env
+.env
+.env.*
+!.env.example
+*.pem
+*.tgz
+
 # Lockfiles from other package managers
 package-lock.json
 yarn.lock

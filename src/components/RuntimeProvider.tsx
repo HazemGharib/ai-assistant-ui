@@ -5,6 +5,7 @@ import {
   useLocalRuntime,
 } from "@assistant-ui/react";
 import type { ReactNode } from "react";
+import { createHttpBackendAdapter } from "../adapters/httpBackendAdapter";
 import { localAgentAdapter } from "../adapters/localAgentAdapter";
 
 const auiConfig = AuiConfig({
@@ -31,8 +32,16 @@ type RuntimeProviderProps = {
   children: ReactNode;
 };
 
+function selectAdapter() {
+  const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL as string | undefined;
+  if (baseUrl && baseUrl.trim().length > 0) {
+    return createHttpBackendAdapter({ baseUrl: baseUrl.trim() });
+  }
+  return localAgentAdapter;
+}
+
 export function RuntimeProvider({ children }: RuntimeProviderProps) {
-  const runtime = useLocalRuntime(localAgentAdapter);
+  const runtime = useLocalRuntime(selectAdapter());
 
   return (
     <AssistantRuntimeProvider runtime={runtime} config={auiConfig}>

@@ -2,28 +2,47 @@
 
 Minimal conversational frontend for the TypeScript RAG + MCP agent platform.
 
+## Ownership
+
+| Owns | Does not own |
+| ------ | -------------- |
+| Chat presentation, client UX, adapters | Orchestration, RAG, MCP tools |
+
+Outbound: `ui-backend-chat` via `@hazemgharib/ai-agent-contracts@0.1.0` (GitHub Packages; see `.npmrc`)  
+Full map: [`ai-assistant-spec-hub/overall-context/ownership.md`](../ai-assistant-spec-hub/overall-context/ownership.md)
+
 ## Stack
 
 - React 19 + TypeScript + Vite
-- [assistant-ui](https://www.assistant-ui.com/) with a **local stub runtime** (no API keys, $0)
+- [assistant-ui](https://www.assistant-ui.com/)
+- Local stub adapter when `VITE_BACKEND_BASE_URL` is unset; HTTP backend adapter when set
 
-## Run locally
+## Isolated run
 
 ```bash
+# requires ~/.npmrc auth for GitHub Packages, or a local contracts link (see contracts README)
 pnpm install
+pnpm test
+pnpm lint
+pnpm typecheck
 pnpm dev
 ```
 
-Open the URL Vite prints (usually `http://localhost:5173`).
+Open the URL Vite prints (usually `http://127.0.0.1:5173`). With no `VITE_BACKEND_BASE_URL`, uses `localAgentAdapter` (no backend).
 
-## Architecture notes
+## Integrated mode
 
-Per the platform constitution:
+```bash
+VITE_BACKEND_BASE_URL=http://127.0.0.1:3001 pnpm dev
+```
 
-- UI stays independent of agent internals
-- Adapter lives in `src/adapters/localAgentAdapter.ts` — swap this for the Node agent later
-- No secrets in the browser; no paid cloud required for this shell
+See [quickstart](../ai-assistant-spec-hub/specs/001-platform-foundation/quickstart.md).
 
-## Next
+## Engineering standards
 
-Wire `localAgentAdapter` to the agent backend chat endpoint once it exists.
+[`engineering-standards.md`](../ai-assistant-spec-hub/overall-context/engineering-standards.md)
+
+## Security / cost
+
+- **$0** local shell — no API keys, no AWS, no paid cloud required
+- No secrets in the browser; no inter-service auth in Phase 1
